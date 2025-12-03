@@ -1,0 +1,84 @@
+.admin-login-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 28px 20px 40px;
+  display: grid;
+  gap: 16px;
+}
+
+.admin-login-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+.admin-login-head h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  font-weight: 800;
+}
+.admin-login-head p { margin: 0; opacity: .8; }
+
+.admin-alert {
+  background: #ffe7e7;
+  border: 1px solid #ffcccc;
+  color: #b10000;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.admin-login-form {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.field { display: grid; gap: 6px; }
+.field span { font-weight: 700; }
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #fff;
+  outline: none;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #111;
+  background: #fff;
+  color: #111;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn.solid {
+  border-color: #0f172a;
+  background: #111827;
+  color: #fff;
+}
+.btn.ghost {
+  background: #fff;
+  border-color: #111;
+}
+.btn.full { width: 100%; }
+
+.admin-demo {
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  border-radius: 14px;
+  padding: 16px;
+}
+.admin-demo h2 { margin: 0 0 8px; }
+.demo-box {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
