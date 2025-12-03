@@ -7,6 +7,11 @@ import { useToast } from "../../components/ui-kit";
 import { getProfile, saveProfile, getSettings, saveSettings } from "../../utils/data";
 import MapBlock from "../../components/MapBlock";
 
+// 🔗 Backend base URL (Railway by default; overridable via env var)
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL ||
+  "https://mastoride-web-dev-production-d469.up.railway.app";
+
 const NAV_ITEMS = [
   { id: "profile", label: "Profile", icon: "👤" },
   { id: "book", label: "Book Ride", icon: "🚗" },
@@ -250,8 +255,8 @@ export default function UserDashboard() {
           if (!payload.pickup || !payload.dropoff || !payload.rideDate || !payload.rideTime || !payload.studentEmail) {
             pushToast("Please complete ride details before payment.", "error");
           } else {
-            // Create booking
-            const createRes = await fetch("http://localhost:5001/api/booking", {
+            // Create booking  🔽 UPDATED TO USE API_BASE_URL
+            const createRes = await fetch(`${API_BASE_URL}/api/booking`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
@@ -262,9 +267,9 @@ export default function UserDashboard() {
               pushToast(createData.error || "Failed to create booking", "error");
             } else {
               const bookingId = createData.booking?._id;
-              // Mark booking completed to generate ride history
+              // Mark booking completed to generate ride history  🔽 UPDATED
               if (bookingId) {
-                await fetch(`http://localhost:5001/api/booking/${bookingId}`, {
+                await fetch(`${API_BASE_URL}/api/booking/${bookingId}`, {
                   method: "PUT",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
@@ -295,6 +300,7 @@ export default function UserDashboard() {
       })();
     }, 800);
   }, [currentUser, badgesInitialized, fare, ride, settings, profile]);
+
   if (!authChecked) return null;
   if (!currentUser || (currentUser.role !== "user" && currentUser.role !== "student")) return <Navigate to="/login" replace />;
 
