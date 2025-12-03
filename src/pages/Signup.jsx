@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
+// 🔗 Backend base URL (Railway by default; overridable via env var)
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL ||
+  "https://mastoride-web-dev-production-d469.up.railway.app";
+
 export default function Signup() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -25,7 +30,7 @@ export default function Signup() {
       setLoading(true);
 
       try {
-        const response = await fetch("http://localhost:5001/api/auth/signup", {
+        const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +52,7 @@ export default function Signup() {
           setErrors({ api: data.error || "Signup failed" });
         }
       } catch (error) {
-        console.error("Signup request error:", error); // 👈 extra debug info
+        console.error("Signup request error:", error);
         setErrors({
           api: "Cannot connect to server. Make sure backend is running.",
         });
@@ -106,7 +111,7 @@ export default function Signup() {
                 className={errors.password ? "error" : ""}
                 disabled={loading}
               />
-            {errors.password && (
+              {errors.password && (
                 <span className="sg-error">{errors.password}</span>
               )}
             </div>
@@ -141,3 +146,4 @@ export default function Signup() {
     </>
   );
 }
+        
